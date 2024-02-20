@@ -7,10 +7,10 @@ from sqlalchemy import Column, String
 class User(BaseModel, Base):
     """This is the class for user
     Attributes:
-        email: email address
-        password: password for you login
-        first_name: first name
-        last_name: last name
+        email: email address String(128) can't be null
+        password: password for you login String(128) can't be null
+        first_name: first name String(128)
+        last_name: last name String(128)
     """
     __tablename__ = "users"
     email = Column(String(128), nullable=False)
