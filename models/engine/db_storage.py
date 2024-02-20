@@ -30,7 +30,7 @@ class DBStorage:
         our_db = getenv('HBNB_MYSQL_DB')
         our_env = getenv('HBNB_ENV')
 
-	self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
+        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
                                       .format(our_user, our_pwd, our_host, our_db),pool_pre_ping=True)
 
     def all(self, cls=None):
