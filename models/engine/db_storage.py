@@ -33,6 +33,22 @@ class DBStorage:
 	self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
                                       .format(our_user, our_pwd, our_host, our_db),pool_pre_ping=True)
 
+    def all(self, cls=None):
+        """all objects depending of the class name (argument cls)"""
+        if clas is None:
+            objs = self.__session.query(State).all()
+            objs.extend(self.__session.query(City).all())
+            objs.extend(self.__session.query(User).all())
+            objs.extend(self.__session.query(Place).all())
+            objs.extend(self.__session.query(Review).all())
+            objs.extend(self.__session.query(Amenity).all())
+        else:
+            if type(clas) == str:
+                clas = eval(clas)
+            objs = self.__session.query(clas)
+        return {"{}.{}".format(type(obj).__name__, obj.id):
+                obj for obj in objs}
+
     def new(self, obj):
         """ Adds new obj to DB session """
         self.__session.merge(obj)
@@ -40,3 +56,7 @@ class DBStorage:
     def save(self):
         """ Commit changes to DB session """
         self.__session.commit()
+    def delete(self, obj=None):
+        """Delete from the current db"""
+        if obj is not None:
+            self.__session.delete(obj)
