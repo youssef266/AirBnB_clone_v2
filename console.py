@@ -341,19 +341,19 @@ class HBNBCommand(cmd.Cmd):
         print("Usage: update <className> <id> <attName> <attVal>\n")
 
     @staticmethod
-    def is_int(v):
+    def is_int(val):
         """ Checks if a given value is an integer """
         try:
-            int(v)
+            int(val)
             return True
         except ValueError:
             return False
 
     @staticmethod
-    def is_float(v):
+    def is_float(val):
         """ Checks if a given value is a float """
         try:
-            float(v)
+            float(val)
             return True
         except ValueError:
             return False 

@@ -30,7 +30,7 @@ class BaseModel:
                 self.updated_at = datetime.now()
             for key, val in kwargs.items():
                 if key != "__class__":
-                    if ey in ["created_at", "updated_at"]:
+                    if key in ["updated_at", "created_at"]:
                         setattr(self, key, datetime.fromisoformat(val))
                     else:
                         setattr(self, key, val)
