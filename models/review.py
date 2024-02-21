@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """ Review module for the HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 
 
-class Review(BaseModel):
+class Review(BaseModel, Base):
     """This is the class for Review
     Attributes:
         place_id: place id String(1024)can't be null
