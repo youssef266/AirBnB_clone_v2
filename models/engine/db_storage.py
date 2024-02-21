@@ -1,16 +1,19 @@
 #!/usr/bin/python3
 """
  This file declares a class that manage database storage """
-from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
-from models.base_model import BaseModel, Base
-from models.user import User
-from models.state import State
-from models.city import City
+from os import getenv
 from models.amenity import Amenity
+from models.city import City
 from models.place import Place
 from models.review import Review
-from os import getenv
+from models.state import State
+from models.user import User
+from models.base_model import Base
+from models.base_model import BaseModel
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import sessionmaker
 
 class DBStorage:
     """"""
@@ -70,3 +73,4 @@ class DBStorage:
     def close(self):
         """ Call delete method """
         self.__session.close()
+ 
