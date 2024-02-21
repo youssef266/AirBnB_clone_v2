@@ -32,9 +32,9 @@ class DBStorage:
 
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
                                       .format(our_user, our_pwd, our_host, our_db),pool_pre_ping=True)
-
         if our_env == 'test':
-            Base.metadata.drop_all(self.__engine)
+            Base.metadata.drop_all(self.__engine
+                                   )
     def all(self, cls=None):
         """all objects depending of the class name (argument cls)"""
         cls_list = {}
