@@ -1,23 +1,40 @@
 #!/usr/bin/python3
-"""This is the user class"""
-from models.base_model import BaseModel, Base
+"""This module defines a class User"""
+import os
 from sqlalchemy import Column, String
-from os import getenv
 from sqlalchemy.orm import relationship
 
-dbstorage = getenv('HBNB_TYPE_STORAGE')
+from models.base_model import BaseModel, Base
+
 
 class User(BaseModel, Base):
-    __tablename__ = "users"
-    """This is the class for user
-    Attributes:
-        email: email address String(128) can't be null
-        password: password for you login String(128)
-        first_name: first name String(128)
-        last_name: last name String(128)
-    """
-    __tablename__ = "users"
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
+    """This class defines a user by various attributes"""
+    __tablename__ = 'users'
+
+    email = Column(
+        String(128), nullable=False
+    ) if os.getenv('HBNB_TYPE_STORAGE') == 'db' else ''
+
+    password = Column(
+        String(128), nullable=False
+    ) if os.getenv('HBNB_TYPE_STORAGE') == 'db' else ''
+
+    first_name = Column(
+        String(128), nullable=True
+    ) if os.getenv('HBNB_TYPE_STORAGE') == 'db' else ''
+
+    last_name = Column(
+        String(128), nullable=True
+    ) if os.getenv('HBNB_TYPE_STORAGE') == 'db' else ''
+
+    places = relationship(
+        'Place',
+        cascade="all, delete, delete-orphan",
+        backref='user'
+    ) if os.getenv('HBNB_TYPE_STORAGE') == 'db' else None
+
+    reviews = relationship(
+        'Review',
+        cascade="all, delete, delete-orphan",
+        backref='user'
+    ) if os.getenv('HBNB_TYPE_STORAGE') == 'db' else None
