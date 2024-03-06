@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
- This file declares a class that manage database storage """
+This file declares a class that manages database storage
+"""
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
 from models.base_model import BaseModel, Base
@@ -19,10 +20,10 @@ class DBStorage:
     __engine = None
     __session = None
     __classes = {
-                'BaseModel': BaseModel, 'User': User, 'Place': Place,
-                'State': State, 'City': City, 'Amenity': Amenity,
-                'Review': Review
-                }
+        'BaseModel': BaseModel, 'User': User, 'Place': Place,
+        'State': State, 'City': City, 'Amenity': Amenity,
+        'Review': Review
+    }
 
     def __init__(self):
         """ Class that creates elements of our MySql """
@@ -33,12 +34,12 @@ class DBStorage:
         our_env = getenv('HBNB_ENV')
 
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
-                                      .format(our_user, our_pwd, our_host, our_db),pool_pre_ping=True)
+                                      .format(our_user, our_pwd, our_host, our_db), pool_pre_ping=True)
         if our_env == 'test':
-            Base.metadata.drop_all(self.__engine
-                                   )
+            Base.metadata.drop_all(self.__engine)
+
     def all(self, cls=None):
-        """all objects depending of the class name (argument cls)"""
+        """all objects depending on the class name (argument cls)"""
         cls_list = {}
 
         if cls:
@@ -62,6 +63,7 @@ class DBStorage:
     def save(self):
         """ Commit changes to DB session """
         self.__session.commit()
+
     def delete(self, obj=None):
         """Delete from the current db"""
         if obj is not None:
@@ -77,4 +79,3 @@ class DBStorage:
     def close(self):
         """ Call delete method """
         self.__session.close()
- 
