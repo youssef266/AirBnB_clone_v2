@@ -35,7 +35,6 @@ class DBStorage:
         if our_env == 'test':
             Base.metadata.drop_all(self.__engine
                                    )
-            self.reload()
     def all(self, cls=None):
         """all objects depending of the class name (argument cls)"""
         cls_list = {}
