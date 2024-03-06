@@ -8,7 +8,6 @@ from sqlalchemy.orm import relationship
 dbstorage = getenv('HBNB_TYPE_STORAGE')
 
 class User(BaseModel, Base):
-    __tablename__ = "users"
     """This is the class for user
     Attributes:
         email: email address String(128) can't be null
