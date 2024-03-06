@@ -11,6 +11,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from os import getenv
+from sqlalchemy.orm.session import make_transient
+from sqlalchemy import inspect
 
 class DBStorage:
     """"""
@@ -52,6 +54,9 @@ class DBStorage:
 
     def new(self, obj):
         """ Adds new obj to DB session """
+        if inspect(obj).persistent:
+            self.__session.expunge(obj)  # expunge the object from session
+            make_transient(obj)  # make it transient
         self.__session.add(obj)
 
     def save(self):
